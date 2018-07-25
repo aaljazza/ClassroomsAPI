@@ -4,6 +4,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from classes import views
+from classroom_api.views import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -13,6 +14,11 @@ urlpatterns = [
     path('classrooms/create', views.classroom_create, name='classroom-create'),
     path('classrooms/<int:classroom_id>/update/', views.classroom_update, name='classroom-update'),
     path('classrooms/<int:classroom_id>/delete/', views.classroom_delete, name='classroom-delete'),
+    path('api/list/', ListView.as_view(), name='api-list'),
+    path('api/detail/<int:class_id>/', DetailView.as_view(), name='api-detail'),
+    path('api/create/', CreateView.as_view(), name='api-create'),
+    path('api/update/<int:class_id>/', UpdateView.as_view(), name='api-update'),
+    path('api/delete/<int:class_id>/', DeleteView.as_view(), name='api-delete'),
 ]
 
 if settings.DEBUG:
